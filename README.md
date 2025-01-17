@@ -9,6 +9,7 @@ A fast multimodal LLM for real-time voice
 </h3>
 
 _Latest News_
+* 2024/11 — [Ultravox 0.4.1](https://github.com/fixie-ai/ultravox/releases/tag/v0.4.1) available
 * 2024/08 — [Ultravox 0.4](https://github.com/fixie-ai/ultravox/releases/tag/v0.4) available
 * 2024/08 — [Ultravox 0.3](https://github.com/fixie-ai/ultravox/releases/tag/v0.3) available
 * 2024/08 — Preview of Ultravox APIs available, more information [here](https://fixie-ai.github.io/ultradox/)
@@ -26,6 +27,8 @@ Ultravox currently takes in audio and emits streaming text. As we evolve the mod
 ### Demo
 
 See Ultravox in action on our [demo page](https://demo.ultravox.ai).
+
+You can run the Gradio demo locally with `just gradio`. You can run the demo in "voice mode" which allows natural audio conversations with ultravox by running `just gradio --voice_mode=True`
 
 ### Discord
 
@@ -114,9 +117,9 @@ Why would you want to (re-) train Ultravox? Here are a few scenarios:
 
     a. In this case you need to re-train the adapter. You can use `release_config.yaml`, which contains our config for our latest release, and you should be able to simply change the base LLM or encoder by specifying `--text-model <hf-model-id-for-llm>` and/or `--audio-model <hf-model-id-for-encoder>`.
 
-2. You want to improve the knowledge of the model --> NO NEED TO TRAIN ULTRAVOX!
+2. You want to improve the knowledge of the model
 
-    a. We suggest to either use RAG on the fly (no training needed), or fine-tune the LLM backbone instead. You might need to re-train Ultravox if you fine-tune the LLM.
+    a. We suggest to either use RAG on the fly (no training needed), or fine-tune the LLM backbone instead. Fine-tuning the LLM backbone does not require re-training Ultravox (i.e., the existing adapter will work).
 
 3. You want to use your own audio data, for example to add support for a new language.
 
@@ -162,7 +165,7 @@ Before running any training jobs, you need to setup your SSH key in the Mosaic P
 ```bash
 ## Create a new SSH key and add it to the Mosaic Platform
 # ssh-keygen -f ~/.ssh/mclid_id_rsa
-## add the **public** key to Github
+## add the **public** key to GitHub
 # mcli create secret ssh ~/.ssh/mclid_id_rsa
 
 mcli run -f mcloud.yaml --follow
